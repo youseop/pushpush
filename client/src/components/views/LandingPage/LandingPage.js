@@ -6,7 +6,12 @@ import LoginPage from '../LoginPage/LoginPage'
 function LandingPage() {
     const user = useSelector(state => state.user)
 
-    if (!user?.userData?.isAuth) {
+    const playGame = () => {
+        alert('게임 입장.')
+    }
+
+    // if (!user?.userData?.isAuth) {
+    if (false) {
         return (
             <Link to='/login'>
                 로그인
@@ -16,7 +21,12 @@ function LandingPage() {
     else {
         return (
             <div>
-                game play
+                <Link to='/rank'>
+                    랭킹 보기
+                </Link>
+                <div onClick={playGame}>
+                    게임 플레이 하기
+                </div>
             </div>
         )
     }

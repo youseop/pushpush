@@ -4,6 +4,7 @@ import Auth from "../hoc/auth";
 // pages for this product
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
+import RankPage from './views/RankPage/RankPage';
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 
 //null   Anyone Can go inside
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/" component={Auth(LandingPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
+        <Route exact path="/rank" component={Auth(RankPage, true)} />
       </Switch>
     </Suspense>
   );
