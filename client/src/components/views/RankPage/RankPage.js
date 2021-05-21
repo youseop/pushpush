@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useConstructor } from '../../functions/useConstructor'
 
 function RankPage() {
