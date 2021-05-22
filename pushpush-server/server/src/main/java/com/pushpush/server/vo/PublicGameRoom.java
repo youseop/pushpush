@@ -1,11 +1,12 @@
 package com.pushpush.server.vo;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
+@Getter
 @Entity(name = "public_game_room")
 @NoArgsConstructor
 public class PublicGameRoom {

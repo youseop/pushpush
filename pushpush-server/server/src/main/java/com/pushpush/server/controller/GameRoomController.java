@@ -22,20 +22,18 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 @RestController
+@RequiredArgsConstructor
 public class GameRoomController {
 
     // 방 생성
 
     //@Autowired
+
     private final PublicGameRoomService publicGameRoomService;
     /*
     public room random 입장
      */
 
-    @Autowired
-    public GameRoomController(PublicGameRoomService publicGameRoomService) {
-        this.publicGameRoomService = publicGameRoomService;
-    }
 
     @GetMapping("game/room-number")
     public int randomEnterPublicRoom() {
