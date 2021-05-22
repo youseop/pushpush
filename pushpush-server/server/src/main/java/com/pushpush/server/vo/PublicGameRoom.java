@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "game_room")
+@Table(name = "public_game_room")
 public class PublicGameRoom {
 
     @Id
@@ -14,5 +14,6 @@ public class PublicGameRoom {
     @Column(name = "id")
     Integer number;
 
+    boolean isFull;
 
 }

@@ -18,6 +18,6 @@ public class PublicWaitingRoom {
     private Integer id;
 
     private List<String> users = new ArrayList<>();
-    private static Integer totalNumber = 4;
+    private Integer totalNumber;
 
 }
