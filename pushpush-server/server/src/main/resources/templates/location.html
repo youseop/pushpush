@@ -22,7 +22,7 @@
 	var webSocket;
 
 	function connectSocket() {
-		webSocket = new WebSocket('ws://' + location.host + '/chat');
+		webSocket = new WebSocket('ws://' + location.host + '/location');
 		webSocket.onmessage = (data => {
 			$("<input placeholder="+data.data+">"+"</input>").prependTo('#chatBox');
 		});

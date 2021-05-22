@@ -11,11 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class WaitingRoomController {
 
-    private final PublicWaitingRoomRepository publicWaitingRoomRepository;
+    private PublicWaitingRoomRepository publicWaitingRoomRepository;
 
-    public WaitingRoomController(PublicWaitingRoomRepository publicWaitingRoomRepository) {
-        this.publicWaitingRoomRepository = publicWaitingRoomRepository;
-    }
 
     /*
     얻은 방번호를 가지고 대기실 입장.
@@ -33,6 +30,7 @@ public class WaitingRoomController {
         ModelAndView modelAndView = new ModelAndView();
 
         PublicWaitingRoom publicWaitingRoom = publicWaitingRoomRepository.findById(roomNumber).get();
+
         modelAndView.setViewName("enter_waiting_room" + roomNumber);
         modelAndView.addObject("roomNumber", roomNumber);
         return modelAndView;

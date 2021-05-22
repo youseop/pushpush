@@ -26,6 +26,7 @@ dependencies {
 	implementation 'org.webjars:sockjs-client:1.0.2'
 	implementation 'org.webjars:stomp-websocket:2.3.3'
 	implementation 'org.webjars:bootstrap:3.3.7'
+	implementation 'com.h2database:h2'
 	implementation 'org.webjars:jquery:3.1.1-1'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl:1.2'
@@ -34,7 +35,7 @@ dependencies {
 	//compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
 	compileOnly 'org.projectlombok:lombok'
 	implementation 'org.springframework.data:spring-data-keyvalue'
-
+	runtimeOnly 'mysql:mysql-connector-java'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

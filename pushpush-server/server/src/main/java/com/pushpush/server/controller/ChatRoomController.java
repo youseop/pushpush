@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class ChatRoomController {
     List<ChatRoom> chatRooms = new ArrayList<>();
 
-    @RequestMapping(value = "/" , headers = "Connection!=Upgrade")
+    @RequestMapping(value = "/chat" , headers = "Connection!=Upgrade")
     // 방 생성
     public ModelAndView newRoom() {
         ModelAndView modelAndView = new ModelAndView();
@@ -22,11 +22,12 @@ public class ChatRoomController {
         return modelAndView;
     }
 
-    @GetMapping("/game/room-number")
-    public @ResponseBody int createRoom() {
-        ChatRoom chatRoom = new ChatRoom();
-        chatRooms.add(chatRoom);
-        return chatRoom.getNumber();
+    @RequestMapping(value = "/location" , headers = "Connection!=Upgrade")
+    // 방 생성
+    public ModelAndView newLocation() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("chat");
+        return modelAndView;
     }
 
     @RequestMapping("/existing")
