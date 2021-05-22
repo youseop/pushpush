@@ -11,5 +11,4 @@ public class WebSocketController {
         return "ws-broadcast";
     }
 
-
 }

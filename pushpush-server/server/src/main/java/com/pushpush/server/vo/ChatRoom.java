@@ -10,19 +10,10 @@ import javax.persistence.*;
 public class ChatRoom {
 
 
-
-    @Transient
-    static int roomCount = 0;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     int number;
-
-    public ChatRoom() {
-        this.number = roomCount;
-        roomCount += 1;
-    }
 
     public boolean isSameRoomNumber(int roomNumber) {
         return this.number == roomNumber;
@@ -34,4 +25,5 @@ public class ChatRoom {
                 "Number=" + number +
                 '}';
     }
+
 }

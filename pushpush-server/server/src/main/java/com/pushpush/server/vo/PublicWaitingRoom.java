@@ -9,13 +9,13 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "waiting_room")
-public class WaitingRoom {
+@Table(name = "public_waiting_room")
+public class PublicWaitingRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     private List<String> users = new ArrayList<>();
     private static Integer totalNumber = 4;
