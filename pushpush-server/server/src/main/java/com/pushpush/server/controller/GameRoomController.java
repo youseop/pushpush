@@ -27,6 +27,7 @@ public class GameRoomController {
 
     // 방 생성
 
+    @Autowired
     private PublicGameRoomService publicGameRoomService;
     /*
     public room random 입장
