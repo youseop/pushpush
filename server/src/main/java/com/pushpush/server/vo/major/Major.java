@@ -17,8 +17,12 @@ public class Major {
     @Column(nullable = false)
     private String major;
 
+    @Column(nullable = false)
+    private Integer point;
+
     @Builder
-    public Major(String major){
+    public Major(String major, Integer point){
         this.major = major;
+        this.point = point;
     }
 }

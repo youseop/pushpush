@@ -61,12 +61,12 @@ public class UserController {
                 if("userId".equals(cookie.getName())) {
                     value = cookie.getValue();
                     user = userService.getUser(value);
-                    return new ResponseEntity(user, HttpStatus.OK);
+                    return new ResponseEntity<>(user, HttpStatus.OK);
                 }
             }
         }
 
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/api/users/logout")
