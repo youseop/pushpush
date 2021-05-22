@@ -2,11 +2,9 @@ package com.pushpush.server.controller;
 
 import com.google.gson.JsonObject;
 import com.pushpush.server.config.JwtTokenUtil;
-import com.pushpush.server.web.jwt.JwtUserDetailsService;
+import com.pushpush.server.service.JwtUserDetailsService;
 import com.pushpush.server.web.jwt.JwtRequest;
-import com.pushpush.server.web.jwt.JwtResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;

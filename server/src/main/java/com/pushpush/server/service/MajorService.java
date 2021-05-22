@@ -1,4 +1,4 @@
-package com.pushpush.server.web.major;
+package com.pushpush.server.service;
 
 import com.pushpush.server.vo.major.Major;
 import com.pushpush.server.vo.major.MajorRepository;

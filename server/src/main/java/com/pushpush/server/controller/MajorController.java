@@ -2,10 +2,10 @@ package com.pushpush.server.controller;
 
 import com.google.gson.JsonObject;
 import com.pushpush.server.vo.major.Major;
-import com.pushpush.server.web.jwt.JwtUserDetailsService;
+import com.pushpush.server.service.JwtUserDetailsService;
 import com.pushpush.server.web.major.RankingDto;
 import com.pushpush.server.web.major.RankingDtoWrapper;
-import com.pushpush.server.web.major.MajorService;
+import com.pushpush.server.service.MajorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

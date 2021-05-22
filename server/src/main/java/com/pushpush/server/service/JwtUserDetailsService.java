@@ -1,4 +1,4 @@
-package com.pushpush.server.web.jwt;
+package com.pushpush.server.service;
 
 import com.pushpush.server.vo.major.MajorRepository;
 import com.pushpush.server.vo.users.Users;
