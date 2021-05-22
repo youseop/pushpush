@@ -1,0 +1,89 @@
+package com.pushpush.server.controller;
+
+import com.pushpush.server.vo.users.Users;
+import com.pushpush.server.vo.users.UsersRepository;
+import com.pushpush.server.web.jwt.JwtUserDetailsService;
+import com.pushpush.server.web.users.Response;
+import com.pushpush.server.web.users.UserDto;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@RestController
+@RequiredArgsConstructor
+public class UserController {
+
+    private final JwtUserDetailsService userService;
+    private UsersRepository userRepository;
+
+    @PostMapping("/api/users/register")
+    public Response signup(@RequestBody UserDto infoDto) { // 회원 추가
+        Response response = new Response();
+
+        try {
+            userService.save(infoDto);
+            response.setResponse("success");
+            response.setMessage("회원가입을 성공적으로 완료했습니다.");
+        } catch (Exception e) {
+            response.setResponse("failed");
+            response.setMessage("회원가입을 하는 도중 오류가 발생했습니다.");
+            response.setData(e.toString());
+        }
+        return response;
+    }
+
+    @GetMapping("/api/users/auth")
+    public ResponseEntity<?> authUser(HttpServletRequest request){
+
+        Cookie[] cookies = request.getCookies();
+        String value;
+        Users user;
+
+        if(cookies != null){
+            for(Cookie cookie : cookies) {
+                if("userId".equals(cookie.getName())) {
+                    value = cookie.getValue();
+                    user = userService.getUser(value);
+                    return ResponseEntity.ok(user);
+                }
+            }
+        }
+
+        return ResponseEntity.ok(false);
+    }
+
+    @GetMapping("/api/users/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response, HttpServletRequest request){
+
+        Cookie[] cookies = request.getCookies();
+        String token;
+
+        if(cookies != null){
+            for(Cookie cookie : cookies) {
+                if("userId".equals(cookie.getName())) {
+                    String id = cookie.getValue();
+                    userService.saveToken(id, null);
+                    break;
+                }
+            }
+        }
+
+        Cookie myCookie = new Cookie("userToken", null);
+        myCookie.setMaxAge(0);
+        myCookie.setPath("/");
+        response.addCookie(myCookie);
+
+        Cookie idCookie = new Cookie("userId", null);
+        idCookie.setMaxAge(0);
+        idCookie.setPath("/");
+        response.addCookie(idCookie);
+
+        return ResponseEntity.ok(true);
+    }
+
+}
