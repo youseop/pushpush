@@ -13,11 +13,11 @@ public class PublicGameRoomService {
     // save
     private PublicGameRoomRepository publicGameRoomRepository;
 
+
     @Autowired
     public PublicGameRoomService(PublicGameRoomRepository publicGameRoomRepository) {
         this.publicGameRoomRepository = publicGameRoomRepository;
     }
-
 
     @Transactional
     public void insert(PublicGameRoom publicGameRoom) {
