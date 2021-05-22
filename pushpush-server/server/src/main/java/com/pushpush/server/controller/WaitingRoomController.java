@@ -14,19 +14,19 @@ import java.util.stream.Collectors;
 @Controller
 public class WaitingRoomController {
 
-    @PostMapping("/waiting-room")
-    public ModelAndView enterWaitingRoom(@RequestParam int roomNumber) {
-        ModelAndView mv = new ModelAndView();
-        List<WaitingRoom> new_list = chatRooms.stream().
-                filter(chatRoom -> chatRoom.isSameRoomNumber(roomNumber))
-                .collect(Collectors.toList());
-        if(new_list != null && new_list.size() > 0) {
-            mv.addObject("roomNumber", roomNumber);
-            mv.setViewName("existing");
-        }
-        return mv;
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("newRoom");
-        return modelAndView;
-    }
+//    @PostMapping("/waiting-room")
+//    public ModelAndView enterWaitingRoom(@RequestParam int roomNumber) {
+//        /*ModelAndView mv = new ModelAndView();
+//        List<WaitingRoom> new_list = chatRooms.stream().
+//                filter(chatRoom -> chatRoom.isSameRoomNumber(roomNumber))
+//                .collect(Collectors.toList());
+//        if(new_list != null && new_list.size() > 0) {
+//            mv.addObject("roomNumber", roomNumber);
+//            mv.setViewName("existing");
+//        }
+//        return mv;
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("newRoom");
+//        return modelAndView;*/
+//    }
 }

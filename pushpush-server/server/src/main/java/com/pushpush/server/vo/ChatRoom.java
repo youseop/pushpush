@@ -19,10 +19,6 @@ public class ChatRoom {
     @Column(name = "id")
     int number;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "waiting_room_id", referencedColumnName = "id")
-    private WaitingRoom waitingRoom;
-
     public ChatRoom() {
         this.number = roomCount;
         roomCount += 1;

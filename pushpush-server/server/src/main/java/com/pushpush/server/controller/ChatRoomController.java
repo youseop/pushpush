@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 public class ChatRoomController {
     List<ChatRoom> chatRooms = new ArrayList<>();
 
-    @PostMapping("/newRoom")
+    @RequestMapping(value = "/" , headers = "Connection!=Upgrade")
     // 방 생성
     public ModelAndView newRoom() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("newRoom");
+        modelAndView.setViewName("chat");
         return modelAndView;
     }
 

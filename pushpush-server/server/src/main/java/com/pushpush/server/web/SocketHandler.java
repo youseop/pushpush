@@ -9,6 +9,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 @Component
@@ -18,16 +19,13 @@ public class SocketHandler extends TextWebSocketHandler {
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
-        String msg = message.getPayload();
-        JSONObject obj = JsonToObjectParser(msg);
-        for(String key : sessionMap.keySet()) {
-            WebSocketSession wss = sessionMap.get(key);
+        sessionMap.forEach((key, socketSession) -> {
             try {
-                wss.sendMessage(new TextMessage(obj.toJSONString()));
-            }catch(Exception e) {
+                socketSession.sendMessage(new TextMessage(message.getPayload()));
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -36,10 +34,10 @@ public class SocketHandler extends TextWebSocketHandler {
         //소켓 연결
         super.afterConnectionEstablished(session);
         sessionMap.put(session.getId(), session);
-        JSONObject obj = new JSONObject();
-        obj.put("type", "getId");
-        obj.put("sessionId", session.getId());
-        session.sendMessage(new TextMessage(obj.toJSONString()));
+//        JSONObject obj = new JSONObject();
+//        obj.put("type", "getId");
+//        obj.put("sessionId", session.getId());
+        session.sendMessage(new TextMessage("채팅방을 자유롭게 이용해주세요"));
     }
 
     @Override

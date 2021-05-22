@@ -17,8 +17,6 @@ public class WaitingRoom {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(mappedBy = "waitingRoom")
-    private ChatRoom chatRoom;
     private List<String> users = new ArrayList<>();
     private static Integer totalNumber = 4;
 
