@@ -1,5 +1,6 @@
 package com.pushpush.server.controller;
 
+import com.google.gson.JsonObject;
 import com.pushpush.server.vo.users.Users;
 import com.pushpush.server.vo.users.UsersRepository;
 import com.pushpush.server.web.jwt.JwtUserDetailsService;
@@ -7,6 +8,7 @@ import com.pushpush.server.web.users.Response;
 import com.pushpush.server.web.users.UserDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +29,11 @@ public class UserController {
 
         try {
             userService.save(infoDto);
+            response.setSuccess(true);
             response.setResponse("success");
             response.setMessage("회원가입을 성공적으로 완료했습니다.");
         } catch (Exception e) {
+            response.setSuccess(false);
             response.setResponse("failed");
             response.setMessage("회원가입을 하는 도중 오류가 발생했습니다.");
             response.setData(e.toString());
@@ -49,16 +53,16 @@ public class UserController {
                 if("userId".equals(cookie.getName())) {
                     value = cookie.getValue();
                     user = userService.getUser(value);
-                    return ResponseEntity.ok(user);
+                    return new ResponseEntity(user, HttpStatus.OK);
                 }
             }
         }
 
-        return ResponseEntity.ok(false);
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/api/users/logout")
-    public ResponseEntity<?> logout(HttpServletResponse response, HttpServletRequest request){
+    public String logout(HttpServletResponse response, HttpServletRequest request){
 
         Cookie[] cookies = request.getCookies();
         String token;
@@ -83,7 +87,10 @@ public class UserController {
         idCookie.setPath("/");
         response.addCookie(idCookie);
 
-        return ResponseEntity.ok(true);
+        JsonObject obj =new JsonObject();
+        obj.addProperty("success", true);
+
+        return obj.toString();
     }
 
 }

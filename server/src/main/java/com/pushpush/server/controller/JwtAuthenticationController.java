@@ -1,5 +1,6 @@
 package com.pushpush.server.controller;
 
+import com.google.gson.JsonObject;
 import com.pushpush.server.config.JwtTokenUtil;
 import com.pushpush.server.web.jwt.JwtUserDetailsService;
 import com.pushpush.server.web.jwt.JwtRequest;
@@ -34,7 +35,7 @@ public class JwtAuthenticationController {
     private JwtUserDetailsService userDetailsService;
 
     @RequestMapping(value = "/api/users/login", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest, HttpServletResponse response) throws Exception {
+    public String createAuthenticationToken(@RequestBody JwtRequest authenticationRequest, HttpServletResponse response) throws Exception {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
@@ -54,7 +55,11 @@ public class JwtAuthenticationController {
         idCookie.setPath("/");
         response.addCookie(idCookie);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        JsonObject obj =new JsonObject();
+        obj.addProperty("success", true);
+        obj.addProperty("token", token);
+
+        return obj.toString();
     }
 
     private void authenticate(String username, String password) throws Exception {
