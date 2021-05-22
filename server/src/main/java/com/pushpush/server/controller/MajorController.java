@@ -1,5 +1,6 @@
 package com.pushpush.server.controller;
 
+import com.google.gson.JsonObject;
 import com.pushpush.server.vo.major.Major;
 import com.pushpush.server.web.jwt.JwtUserDetailsService;
 import com.pushpush.server.web.major.RankingDto;
@@ -35,15 +36,19 @@ public class MajorController {
 
     @PostMapping("/api/rank/update")
     public String updateRank(@RequestBody RankingDtoWrapper ranking_list){
+        JsonObject obj =new JsonObject();
         try{
             List<RankingDto> rankingList = ranking_list.getData();
             for(RankingDto rank : rankingList){
                 majorService.updateRanking(rank.getPoint(), userService.getUser(rank.getUsername()).getMajor_idx());
             }
 
-            return "OK";
+            obj.addProperty("success", true);
+            return obj.toString();
+
         } catch (Exception e){
-            return "not OK";
+            obj.addProperty("success", false);
+            return obj.toString();
         }
     }
 }
