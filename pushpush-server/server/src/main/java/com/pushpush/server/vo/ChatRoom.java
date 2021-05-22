@@ -1,12 +1,14 @@
 package com.pushpush.server.vo;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "chat_room")
+@NoArgsConstructor
 public class ChatRoom {
 
     @Id

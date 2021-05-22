@@ -2,6 +2,8 @@ package com.pushpush.server.vo;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "public_waiting_room")
+@RequiredArgsConstructor
 public class PublicWaitingRoom {
 
     @Id

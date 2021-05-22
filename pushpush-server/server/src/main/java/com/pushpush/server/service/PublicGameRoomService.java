@@ -2,20 +2,32 @@ package com.pushpush.server.service;
 
 import com.pushpush.server.respository.PublicGameRoomRepository;
 import com.pushpush.server.vo.PublicGameRoom;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+@Slf4j
 @Service
-@RequiredArgsConstructor
 public class PublicGameRoomService {
 
     // save
 
-    private PublicGameRoomRepository publicGameRoomRepository;
+    //@Autowired
 
+    private final PublicGameRoomRepository publicGameRoomRepository;
+
+
+//    public PublicGameRoomService() {
+//        this.publicGameRoomRepository =
+//    }
+
+    @Autowired
     public PublicGameRoomService(PublicGameRoomRepository publicGameRoomRepository) {
         this.publicGameRoomRepository = publicGameRoomRepository;
     }

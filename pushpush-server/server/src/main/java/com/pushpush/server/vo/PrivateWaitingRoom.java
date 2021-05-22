@@ -1,6 +1,7 @@
 package com.pushpush.server.vo;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "private_waiting_room")
+@NoArgsConstructor
 public class PrivateWaitingRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
