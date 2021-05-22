@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 
+@Repository
 public interface PublicGameRoomRepository extends JpaRepository<PublicGameRoom, Integer> {
 
     PublicGameRoom findByNumber(Integer number);

@@ -5,6 +5,7 @@ import com.pushpush.server.respository.PrivateWaitingRoomRepository;
 import com.pushpush.server.respository.PublicGameRoomRepository;
 import com.pushpush.server.respository.PublicWaitingRoomRepository;
 
+import com.pushpush.server.service.PublicGameRoomService;
 import com.pushpush.server.vo.PrivateGameRoom;
 import com.pushpush.server.vo.PrivateWaitingRoom;
 import com.pushpush.server.vo.PublicGameRoom;
@@ -16,45 +17,50 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 @RestController
-@RequiredArgsConstructor
 public class GameRoomController {
 
     // 방 생성
-     //@Autowired
+     @Autowired
      private PublicGameRoomRepository publicGameRoomRepository;
-     //@Autowired
+     @Autowired
      private PrivateGameRoomRepository privateGameRoomRepository;
-     //@Autowired
+     @Autowired
      private PublicWaitingRoomRepository publicWaitingRoomRepository;
-     //@Autowired
+     @Autowired
      private PrivateWaitingRoomRepository privateWaitingRoomRepository;
 
-     private Session session;
+     Session session;
 
-
+     @PersistenceContext
+     EntityManager entityManager;
     /*
     public room random 입장
      */
 
-    @GetMapping("game/room-number")
-    public int randomEnterPublicRoom() {
-        //JSONObject object = new JSONObject();
-
-        //ModelAndView modelAndView = new ModelAndView();
-
-        if(this.publicGameRoomRepository.count() == 0) {
-
-            PublicGameRoom publicGameRoom = new PublicGameRoom();
-            publicGameRoom.setFull(false);
-            PublicWaitingRoom publicWaitingRoom = new PublicWaitingRoom();
-            publicWaitingRoom.setTotalNumber(4);
-
-            session.save(publicGameRoom);
-            session.save(publicWaitingRoom);
-        }
-        return (int) this.publicGameRoomRepository.count() - 1;
-    }
+//    @GetMapping("game/room-number")
+//    public int randomEnterPublicRoom() {
+//        //JSONObject object = new JSONObject();
+//
+//        //ModelAndView modelAndView = new ModelAndView
+//        session = entityManager.unwrap(Session.class);
+//        if(this.publicGameRoomService.size() == 0) {
+//
+//            PublicGameRoom publicGameRoom = new PublicGameRoom();
+//            publicGameRoom.setFull(false);
+//
+//            PublicWaitingRoom publicWaitingRoom = new PublicWaitingRoom();
+//            publicWaitingRoom.setTotalNumber(4);
+//
+//            session.save(publicGameRoom);
+//            session.save(publicWaitingRoom);
+//        }
+//        return (int) this.publicGameRoomRepository.count() - 1;
+//    }
 
     @PostMapping("game/private/room-number")
     public int createPrivateRoom() {
