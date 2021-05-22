@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from "react-router-dom";
 import Auth from "../hoc/auth";
+import GameWaitingPage from './views/GameWaitingPage/GameWaitingPage';
 // pages for this product
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/rank" component={Auth(RankPage, true)} />
+        <Route exact path="/waiting-room/:roomId" component={Auth(GameWaitingPage, true)} />
       </Switch>
     </Suspense>
   );

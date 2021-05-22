@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './LandingPage.css'
 
-function LandingPage() {
+function LandingPage(props) {
     const user = useSelector(state => state.user)
 
+    const roomId = 12345
+
     const playGame = () => {
-        alert('게임 입장.')
+        props.history.push(`/waiting-room/${roomId}`)
     }
 
     // if (!user?.userData?.isAuth) {
