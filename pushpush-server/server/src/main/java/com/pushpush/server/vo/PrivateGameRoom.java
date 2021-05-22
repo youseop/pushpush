@@ -14,6 +14,4 @@ public class PrivateGameRoom {
     @Column(name = "id")
     Integer number;
 
-    boolean isFull;
-
 }

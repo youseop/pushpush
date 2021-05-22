@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Table(name = "chat_room")
 public class ChatRoom {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")

@@ -22,53 +22,39 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 @RestController
+@RequiredArgsConstructor
 public class GameRoomController {
 
     // 방 생성
-     @Autowired
-     private PublicGameRoomRepository publicGameRoomRepository;
-     @Autowired
-     private PrivateGameRoomRepository privateGameRoomRepository;
-     @Autowired
-     private PublicWaitingRoomRepository publicWaitingRoomRepository;
-     @Autowired
-     private PrivateWaitingRoomRepository privateWaitingRoomRepository;
 
-     Session session;
-
-     @PersistenceContext
-     EntityManager entityManager;
+    private PublicGameRoomService publicGameRoomService;
     /*
     public room random 입장
      */
 
-//    @GetMapping("game/room-number")
-//    public int randomEnterPublicRoom() {
-//        //JSONObject object = new JSONObject();
-//
-//        //ModelAndView modelAndView = new ModelAndView
-//        session = entityManager.unwrap(Session.class);
-//        if(this.publicGameRoomService.size() == 0) {
-//
-//            PublicGameRoom publicGameRoom = new PublicGameRoom();
-//            publicGameRoom.setFull(false);
-//
-//            PublicWaitingRoom publicWaitingRoom = new PublicWaitingRoom();
-//            publicWaitingRoom.setTotalNumber(4);
-//
-//            session.save(publicGameRoom);
-//            session.save(publicWaitingRoom);
-//        }
-//        return (int) this.publicGameRoomRepository.count() - 1;
-//    }
+    @GetMapping("game/room-number")
+    public int randomEnterPublicRoom() {
+        //JSONObject object = new JSONObject();
 
-    @PostMapping("game/private/room-number")
-    public int createPrivateRoom() {
-        PrivateGameRoom privateGameRoom = new PrivateGameRoom();
-        PrivateWaitingRoom privateWaitingRoom = new PrivateWaitingRoom();
-        session.save(privateGameRoom);
-        session.save(privateWaitingRoom);
-        return( (int) privateGameRoomRepository.count() - 1);
+        //ModelAndView modelAndView = new ModelAndView
+
+        if(this.publicGameRoomService.size() == 0) {
+
+            PublicGameRoom publicGameRoom = new PublicGameRoom();
+            PublicWaitingRoom publicWaitingRoom = new PublicWaitingRoom();
+            publicGameRoomService.insert(publicGameRoom);
+        }
+        return 0;
+        //return (int) this.publicGameRoomRepository.count() - 1;
     }
+
+//    @PostMapping("game/private/room-number")
+//    public int createPrivateRoom() {
+//        PrivateGameRoom privateGameRoom = new PrivateGameRoom();
+//        PrivateWaitingRoom privateWaitingRoom = new PrivateWaitingRoom();
+//        session.save(privateGameRoom);
+//        session.save(privateWaitingRoom);
+//        return( (int) privateGameRoomRepository.count() - 1);
+//    }
 
 }

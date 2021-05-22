@@ -17,7 +17,7 @@ public class PublicWaitingRoom {
     @Column(name = "id")
     private Integer id;
 
-    private List<String> users = new ArrayList<>();
-    private Integer totalNumber;
+    @Column(name = "num_of_current_users")
+    private Integer NumOfCurrentUsers;
 
 }

@@ -2,30 +2,28 @@ package com.pushpush.server.service;
 
 import com.pushpush.server.respository.PublicGameRoomRepository;
 import com.pushpush.server.vo.PublicGameRoom;
-import org.hibernate.Session;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
+import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-@Repository("publicGameRoomService")
-@Transactional()
+@Service
+@RequiredArgsConstructor
 public class PublicGameRoomService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    // save
 
-    @Autowired
-    PublicGameRoomRepository publicGameRoomRepository;
+    private final PublicGameRoomRepository publicGameRoomRepository;
 
-
+    @Transactional
     public void insert(PublicGameRoom publicGameRoom) {
-        Session session = entityManager.unwrap(Session.class);
-        session.save(publicGameRoom);
-        session.flush();
+        publicGameRoomRepository.save(publicGameRoom);
+    }
+
+    @Transactional
+    public Long size() {
+        return publicGameRoomRepository.count();
     }
 
     /*public int size() {
