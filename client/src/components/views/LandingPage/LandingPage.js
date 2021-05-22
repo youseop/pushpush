@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import LoginPage from '../LoginPage/LoginPage'
+import './LandingPage.css'
 
 function LandingPage() {
     const user = useSelector(state => state.user)
@@ -20,13 +20,24 @@ function LandingPage() {
     }
     else {
         return (
-            <div>
-                <Link to='/rank'>
-                    랭킹 보기
-                </Link>
-                <div onClick={playGame}>
+            <div className="landing_container">
+                <img 
+                    className="landing_img"
+                    src="https://i.imgur.com/r1248mm.png" 
+                    alt=""
+                />
+                <div 
+                    onClick={playGame} 
+                    className="landing blue_btn"
+                >
                     게임 플레이 하기
                 </div>
+                <Link 
+                    to='/rank' 
+                    className="landing blue_btn"
+                >
+                    랭킹 보기
+                </Link>
             </div>
         )
     }

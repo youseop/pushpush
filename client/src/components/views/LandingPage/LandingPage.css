@@ -1,0 +1,20 @@
+.landing_container {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+  margin-top: 50px;
+}
+
+.landing_img {
+  width: 80%;
+}
+
+.blue_btn {
+  all: unset;
+  background-color: #256EFF;
+  color: white;
+}

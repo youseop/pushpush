@@ -80,18 +80,22 @@ function LoginPage(props) {
         return (
           <div className="app">
 
-            <Title level={2}>Log In</Title>
+            <div className="login_title">
+              <img 
+                className="login_img"
+                src="https://i.imgur.com/r1248mm.png"
+                alt=""
+              />
+            </div>
             <form onSubmit={handleSubmit} style={{ width: '350px' }}>
 
               <Form.Item required>
-                <Input
+                <input
                   id="name"
-                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder="Enter your name"
                   type="name"
                   value={values.name}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   className={
                     errors.name && touched.name ? 'text-input error' : 'text-input'
                   }
@@ -102,14 +106,12 @@ function LoginPage(props) {
               </Form.Item>
 
               <Form.Item required>
-                <Input
+                <input
                   id="password"
-                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder="Enter your password"
                   type="password"
                   value={values.password}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   className={
                     errors.password && touched.password ? 'text-input error' : 'text-input'
                   }
@@ -124,13 +126,13 @@ function LoginPage(props) {
               )}
 
               <Form.Item>
-                <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >Remember me</Checkbox>
+                {/* <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >Remember me</Checkbox> */}
                 <div>
                   <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
-                    Log in
+                    Get Started
                 </Button>
                 </div>
-                <Link to="/register">sign up</Link>
+                <Link to="/register">Sign Up</Link>
               </Form.Item>
             </form>
           </div>
