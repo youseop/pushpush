@@ -13,7 +13,7 @@ function LandingPage(props) {
     }
 
     // if (!user?.userData?.isAuth) {
-    if (true) {
+    if (false) {
         return (
             <div className="landing_container">
                 <img 

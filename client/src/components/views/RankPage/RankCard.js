@@ -12,7 +12,7 @@ function RankCard({info, index}) {
         </div>
         <div>{info.major}</div>
       </div>
-      <div className="rankcard_score">{info.score} wins</div>
+      <div className="rankcard_score">{info.point} wins</div>
     </div>
   )
 }
