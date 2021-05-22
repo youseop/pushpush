@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.pushpush.server.vo.users.Users;
 import com.pushpush.server.vo.users.UsersRepository;
 import com.pushpush.server.web.jwt.JwtUserDetailsService;
+import com.pushpush.server.web.users.CharacterDto;
 import com.pushpush.server.web.users.Response;
 import com.pushpush.server.web.users.UserDto;
 import lombok.Getter;
@@ -28,10 +29,17 @@ public class UserController {
         Response response = new Response();
 
         try {
-            userService.save(infoDto);
-            response.setSuccess(true);
-            response.setResponse("success");
-            response.setMessage("회원가입을 성공적으로 완료했습니다.");
+            if(userService.checkId(infoDto.getId())){
+                userService.save(infoDto);
+                response.setSuccess(true);
+                response.setResponse("success");
+                response.setMessage("회원가입을 성공적으로 완료했습니다.");
+            }
+            else{
+                response.setSuccess(false);
+                response.setResponse("failed");
+                response.setMessage("존재하는 id 입니다.");
+            }
         } catch (Exception e) {
             response.setSuccess(false);
             response.setResponse("failed");
@@ -93,4 +101,32 @@ public class UserController {
         return obj.toString();
     }
 
+    @PostMapping("/api/users/character")
+    public String customize(@RequestBody CharacterDto character, HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        Integer option = character.getOption();
+        String value;
+        Users user;
+        JsonObject obj =new JsonObject();
+
+        try{
+            if(cookies != null){
+                for(Cookie cookie : cookies) {
+                    if("userId".equals(cookie.getName())) {
+                        value = cookie.getValue();
+                        userService.saveCharacter(value, option);
+
+                        obj.addProperty("success", true);
+                        return obj.toString();
+                    }
+                }
+            }
+        }catch(Exception e){
+            obj.addProperty("success", false);
+            return obj.toString();
+        }
+
+        obj.addProperty("success", false);
+        return obj.toString();
+    }
 }

@@ -67,4 +67,17 @@ public class JwtUserDetailsService implements UserDetailsService {
         return user;
     }
 
+    @Transactional
+    public void saveCharacter(String id, Integer option){
+        userRepository.updateCharacter(id, option);
+    }
+
+    @Transactional
+    public boolean checkId(String id){
+        if(userRepository.findById(id).get() != null){
+            return true;
+        }
+        return false;
+    }
+
 }

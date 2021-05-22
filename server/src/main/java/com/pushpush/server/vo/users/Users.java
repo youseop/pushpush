@@ -33,13 +33,16 @@ public class Users implements UserDetails {
     @Column(nullable = false)
     private Long major_idx;
 
+    private Integer character_option;
+
     @Builder
-    public Users(String id, String password, String auth, Long major_idx, String token){
+    public Users(String id, String password, String auth, Long major_idx, String token, Integer character_option){
         this.id = id;
         this.password = password;
         this.auth = auth;
         this.major_idx = major_idx;
         this.token = token;
+        this.character_option = character_option;
     }
 
     // 사용자의 권한을 콜렉션 형태로 반환

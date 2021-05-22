@@ -17,4 +17,10 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     @Modifying
     @Query("UPDATE user SET token = :token WHERE id = :id")
     void updateToken(@Param("id") String id, @Param("token") String token);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE user SET character_option = :option WHERE id = :id")
+    void updateCharacter(@Param("id") String id, @Param("option") Integer option);
+
 }
