@@ -50,19 +50,22 @@ public class UserController {
 
     @GetMapping("/api/users/auth")
     public ResponseEntity<?> authUser(HttpServletRequest request){
-
         Cookie[] cookies = request.getCookies();
         String value;
         Users user;
 
-        if(cookies != null){
-            for(Cookie cookie : cookies) {
-                if("userId".equals(cookie.getName())) {
-                    value = cookie.getValue();
-                    user = userService.getUser(value);
-                    return new ResponseEntity<>(user, HttpStatus.OK);
+        try{
+            if(cookies != null){
+                for(Cookie cookie : cookies) {
+                    if("userId".equals(cookie.getName())) {
+                        value = cookie.getValue();
+                        user = userService.getUser(value);
+                        return new ResponseEntity<>(user, HttpStatus.OK);
+                    }
                 }
             }
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -73,15 +76,21 @@ public class UserController {
 
         Cookie[] cookies = request.getCookies();
         String token;
+        JsonObject obj =new JsonObject();
 
-        if(cookies != null){
-            for(Cookie cookie : cookies) {
-                if("userId".equals(cookie.getName())) {
-                    String id = cookie.getValue();
-                    userService.saveToken(id, null);
-                    break;
+        try{
+            if(cookies != null){
+                for(Cookie cookie : cookies) {
+                    if("userId".equals(cookie.getName())) {
+                        String id = cookie.getValue();
+                        userService.saveToken(id, null);
+                        break;
+                    }
                 }
             }
+        }catch (Exception e){
+            obj.addProperty("success", false);
+            return obj.toString();
         }
 
         Cookie myCookie = new Cookie("userToken", null);
@@ -94,9 +103,7 @@ public class UserController {
         idCookie.setPath("/");
         response.addCookie(idCookie);
 
-        JsonObject obj =new JsonObject();
         obj.addProperty("success", true);
-
         return obj.toString();
     }
 
