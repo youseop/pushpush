@@ -13,11 +13,18 @@ function LandingPage(props) {
     }
 
     // if (!user?.userData?.isAuth) {
-    if (false) {
+    if (true) {
         return (
-            <Link to='/login'>
-                로그인
-            </Link>
+            <div className="landing_container">
+                <img 
+                    className="landing_img"
+                    src="https://i.imgur.com/r1248mm.png" 
+                    alt=""
+                />
+                <Link to='/login' className="start_btn">
+                    로그인
+                </Link>
+            </div>
         )
     }
     else {
@@ -30,15 +37,15 @@ function LandingPage(props) {
                 />
                 <div 
                     onClick={playGame} 
-                    className="landing blue_btn"
+                    className="landing start_btn"
                 >
-                    게임 플레이 하기
+                    Start!
                 </div>
                 <Link 
                     to='/rank' 
-                    className="landing blue_btn"
+                    className="landing rank_btn"
                 >
-                    랭킹 보기
+                    Ranking?
                 </Link>
             </div>
         )
