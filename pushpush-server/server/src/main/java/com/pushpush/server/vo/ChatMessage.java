@@ -7,6 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Data
+@Table(name = "chat_message")
 public class ChatMessage {
     String author;
     String content;

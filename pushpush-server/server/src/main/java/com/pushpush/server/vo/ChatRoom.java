@@ -2,17 +2,26 @@ package com.pushpush.server.vo;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "chat_room")
 public class ChatRoom {
+
 
 
     @Transient
     static int roomCount = 0;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     int number;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "waiting_room_id", referencedColumnName = "id")
+    private WaitingRoom waitingRoom;
 
     public ChatRoom() {
         this.number = roomCount;

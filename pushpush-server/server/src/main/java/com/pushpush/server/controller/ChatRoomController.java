@@ -22,7 +22,7 @@ public class ChatRoomController {
         return modelAndView;
     }
 
-    @GetMapping("/createRoom")
+    @GetMapping("/game/room-number")
     public @ResponseBody int createRoom() {
         ChatRoom chatRoom = new ChatRoom();
         chatRooms.add(chatRoom);
