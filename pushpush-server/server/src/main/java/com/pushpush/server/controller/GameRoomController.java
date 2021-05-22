@@ -4,6 +4,7 @@ import com.pushpush.server.respository.PrivateGameRoomRepository;
 import com.pushpush.server.respository.PublicGameRoomRepository;
 import com.pushpush.server.vo.PrivateGameRoom;
 import org.hibernate.Session;
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,23 +26,25 @@ public class GameRoomController {
     }
 
 
+
     public ModelAndView createRoom() {
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("game");
-        return modelAndView;
     }
 
     /*
-    random 입장
+    public room random 입장
      */
     @GetMapping("game/room-number")
-    public int randomEnterPublicRoom() {
-
+    public JSONObject randomEnterPublicRoom() {
+        JSONObject object = new JSONObject();
+        if(this.publicGameRoomRepository.count() >= 1) {
+            object.put("success", false);
+        } else{
+            object.put("success", false);
+        }
+        object.put("room_number", this.publicGameRoomRepository.count() - 1);
+        return object;
     }
-
-
-
 
     @PostMapping("game/private/room-number")
     public int createPrivateRoom() {
