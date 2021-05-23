@@ -1,10 +1,8 @@
 package com.pushpush.server.controller;
 
-import com.pushpush.server.respository.PrivateGameRoomRepository;
-import com.pushpush.server.respository.PrivateWaitingRoomRepository;
-import com.pushpush.server.respository.PublicGameRoomRepository;
-import com.pushpush.server.respository.PublicWaitingRoomRepository;
 
+
+import com.pushpush.server.respository.PublicGameRoomRepository;
 import com.pushpush.server.service.PublicGameRoomService;
 import com.pushpush.server.vo.PrivateGameRoom;
 import com.pushpush.server.vo.PrivateWaitingRoom;
@@ -16,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,26 +28,34 @@ public class GameRoomController {
 
     //@Autowired
 
-    private final PublicGameRoomService publicGameRoomService;
+//    @Autowired
+//    private final PublicGameRoomService publicGameRoomService;
+
+    @PersistenceContext
+    EntityManager entityManager;
+
+    @Autowired
+    private final PublicGameRoomRepository publicGameRoomRepository;
     /*
     public room random 입장
      */
-
-
     @GetMapping("game/room-number")
     public int randomEnterPublicRoom() {
         //JSONObject object = new JSONObject();
-
         //ModelAndView modelAndView = new ModelAndView
 
-        if(this.publicGameRoomService.size() == 0) {
+        Session session = entityManager.unwrap(Session.class);
+
+        if(this.publicGameRoomRepository.count() == 0) {
 
             PublicGameRoom publicGameRoom = new PublicGameRoom();
             PublicWaitingRoom publicWaitingRoom = new PublicWaitingRoom();
-            publicGameRoomService.insert(publicGameRoom);
+            //publicGameRoomRepository.save(publicGameRoom);
+            session.save(publicGameRoom);
+            session.save(publicWaitingRoom);
         }
-        return 0;
-        //return (int) this.publicGameRoomRepository.count() - 1;
+
+        return (int) (this.publicGameRoomRepository.count() - 1);
     }
 
 //    @PostMapping("game/private/room-number")

@@ -11,21 +11,21 @@ import javax.transaction.Transactional;
 
 
 @Service
-@RequiredArgsConstructor
 public class PublicGameRoomService {
 
     // save
 
-    //@Autowired
-    private final PublicGameRoomRepository publicGameRoomRepository;
+    @Autowired
+    private PublicGameRoomRepository publicGameRoomRepository;
 
 
-//    public PublicGameRoomService() {
-//        this.publicGameRoomRepository =
-//    }
+    public PublicGameRoomService() {
+
+    }
+
 
     @Transactional
-    public void insert(PublicGameRoom publicGameRoom) {
+    public void save(PublicGameRoom publicGameRoom) {
         publicGameRoomRepository.save(publicGameRoom);
     }
 
