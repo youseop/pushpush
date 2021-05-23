@@ -2,6 +2,7 @@ package com.pushpush.server.controller;
 
 
 
+import com.pushpush.server.respository.PrivateGameRoomRepository;
 import com.pushpush.server.respository.PublicGameRoomRepository;
 import com.pushpush.server.service.PublicGameRoomService;
 import com.pushpush.server.vo.PrivateGameRoom;
@@ -36,6 +37,9 @@ public class GameRoomController {
 
     @Autowired
     private final PublicGameRoomRepository publicGameRoomRepository;
+
+    @Autowired
+    private final PrivateGameRoomRepository privateGameRoomRepository;
     /*
     public room random 입장
      */
@@ -45,26 +49,33 @@ public class GameRoomController {
         //ModelAndView modelAndView = new ModelAndView
 
         Session session = entityManager.unwrap(Session.class);
+        int roomNumber;
 
         if(this.publicGameRoomRepository.count() == 0) {
 
             PublicGameRoom publicGameRoom = new PublicGameRoom();
             PublicWaitingRoom publicWaitingRoom = new PublicWaitingRoom();
             //publicGameRoomRepository.save(publicGameRoom);
+            publicWaitingRoom.setNumOfCurrentUsers(0);
             session.save(publicGameRoom);
             session.save(publicWaitingRoom);
         }
 
-        return (int) (this.publicGameRoomRepository.count() - 1);
+        roomNumber = (int) this.publicGameRoomRepository.count() - 1;
+
+        return roomNumber;
     }
 
-//    @PostMapping("game/private/room-number")
-//    public int createPrivateRoom() {
-//        PrivateGameRoom privateGameRoom = new PrivateGameRoom();
-//        PrivateWaitingRoom privateWaitingRoom = new PrivateWaitingRoom();
-//        session.save(privateGameRoom);
-//        session.save(privateWaitingRoom);
-//        return( (int) privateGameRoomRepository.count() - 1);
-//    }
+    @PostMapping("game/private/room-number")
+    public int createPrivateRoom() {
+        Session session = entityManager.unwrap(Session.class);
+        PrivateGameRoom privateGameRoom = new PrivateGameRoom();
+        PrivateWaitingRoom privateWaitingRoom = new PrivateWaitingRoom();
+        privateWaitingRoom.setNumOfCurrentUsers(0);
+        session.save(privateGameRoom);
+        session.save(privateWaitingRoom);
+        return( (int) privateGameRoomRepository.count() - 1);
+    }
+
 
 }

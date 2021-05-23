@@ -14,7 +14,7 @@ public class ChatMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    int id;
+    Integer id;
     String author;
     String content;
     String timeStamp;
